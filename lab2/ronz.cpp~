@@ -2,8 +2,8 @@
  * \author Allen Higgins
  * \version 1.0.0
  * \copyright GNU Public Licence
- * \mainpage Lab2 Rendezvous
- * \section 
+ * \mainpage Signal Lab2
+ * \section Two threads with Semaphores that signal one thread to proceed and one Thread to wait their turn 
  */
 
 #include "Semaphore.h"

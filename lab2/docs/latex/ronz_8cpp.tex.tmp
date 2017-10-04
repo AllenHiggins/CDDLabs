@@ -1,0 +1,40 @@
+\hypertarget{ronz_8cpp}{}\section{/home/allen/\+Documents/it\+\_\+carlow4/distributed\+\_\+concurrent\+\_\+device\+\_\+development/my\+Labs/\+C\+D\+D\+Labs/lab2/ronz.cpp File Reference}
+\label{ronz_8cpp}\index{/home/allen/\+Documents/it\+\_\+carlow4/distributed\+\_\+concurrent\+\_\+device\+\_\+development/my\+Labs/\+C\+D\+D\+Labs/lab2/ronz.\+cpp@{/home/allen/\+Documents/it\+\_\+carlow4/distributed\+\_\+concurrent\+\_\+device\+\_\+development/my\+Labs/\+C\+D\+D\+Labs/lab2/ronz.\+cpp}}
+{\ttfamily \#include \char`\"{}Semaphore.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$thread$>$}\\*
+Include dependency graph for ronz.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}{task\+One} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Semaphore)
+\item 
+void \hyperlink{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}{task\+Two} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Semaphore)
+\item 
+int \hyperlink{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{ronz.\+cpp@{ronz.\+cpp}!main@{main}}
+\index{main@{main}!ronz.\+cpp@{ronz.\+cpp}}
+\subsubsection[{\texorpdfstring{main(void)}{main(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{}\label{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}
+$<$ Launch the threads \index{ronz.\+cpp@{ronz.\+cpp}!task\+One@{task\+One}}
+\index{task\+One@{task\+One}!ronz.\+cpp@{ronz.\+cpp}}
+\subsubsection[{\texorpdfstring{task\+One(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Semaphore)}{taskOne(std::shared_ptr< Semaphore > theSemaphore)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+One (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Semaphore}
+\end{DoxyParamCaption}
+)}\hypertarget{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}{}\label{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}
+\index{ronz.\+cpp@{ronz.\+cpp}!task\+Two@{task\+Two}}
+\index{task\+Two@{task\+Two}!ronz.\+cpp@{ronz.\+cpp}}
+\subsubsection[{\texorpdfstring{task\+Two(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Semaphore)}{taskTwo(std::shared_ptr< Semaphore > theSemaphore)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+Two (
+\begin{DoxyParamCaption}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Semaphore}
+\end{DoxyParamCaption}
+)}\hypertarget{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}{}\label{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}
