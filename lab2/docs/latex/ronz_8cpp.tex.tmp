@@ -8,10 +8,10 @@ Include dependency graph for ronz.\+cpp\+:
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}{task\+One} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Semaphore)
-\item 
-void \hyperlink{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}{task\+Two} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Semaphore)
-\item 
+void \hyperlink{ronz_8cpp_aa4d8446950451643863852e525143027}{task\+One} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Sem1, std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Sem2)
+\begin{DoxyCompactList}\small\item\em print twice \end{DoxyCompactList}\item 
+void \hyperlink{ronz_8cpp_a936e0443086bc76ddf2bc31dd61f6e86}{task\+Two} (std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Sem1, std\+::shared\+\_\+ptr$<$ \hyperlink{classSemaphore}{Semaphore} $>$ the\+Sem2)
+\begin{DoxyCompactList}\small\item\em print twice \end{DoxyCompactList}\item 
 int \hyperlink{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
 \end{DoxyCompactItemize}
 
@@ -24,17 +24,44 @@ int \hyperlink{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main} (void)
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\hypertarget{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{}\label{ronz_8cpp_a840291bc02cba5474a4cb46a9b9566fe}
-$<$ Launch the threads \index{ronz.\+cpp@{ronz.\+cpp}!task\+One@{task\+One}}
+$<$ Launch the threads
+
+$<$ threads fork rejoins main thread \index{ronz.\+cpp@{ronz.\+cpp}!task\+One@{task\+One}}
 \index{task\+One@{task\+One}!ronz.\+cpp@{ronz.\+cpp}}
-\subsubsection[{\texorpdfstring{task\+One(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Semaphore)}{taskOne(std::shared_ptr< Semaphore > theSemaphore)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+One (
+\subsubsection[{\texorpdfstring{task\+One(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Sem1, std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Sem2)}{taskOne(std::shared_ptr< Semaphore > theSem1, std::shared_ptr< Semaphore > theSem2)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+One (
 \begin{DoxyParamCaption}
-\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Semaphore}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Sem1, }
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Sem2}
 \end{DoxyParamCaption}
-)}\hypertarget{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}{}\label{ronz_8cpp_a2696073bbedb6b55e6a52d2180c2a9b3}
-\index{ronz.\+cpp@{ronz.\+cpp}!task\+Two@{task\+Two}}
+)}\hypertarget{ronz_8cpp_aa4d8446950451643863852e525143027}{}\label{ronz_8cpp_aa4d8446950451643863852e525143027}
+
+
+print twice 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the\+Sem} & is a shared pointer for a semaphore \\
+\hline
+{\em the\+Sem2} & is a shared pointer for a semaphore\\
+\hline
+\end{DoxyParams}
+print part 1 then signal before waiting for task\+Two then print part 2 \index{ronz.\+cpp@{ronz.\+cpp}!task\+Two@{task\+Two}}
 \index{task\+Two@{task\+Two}!ronz.\+cpp@{ronz.\+cpp}}
-\subsubsection[{\texorpdfstring{task\+Two(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Semaphore)}{taskTwo(std::shared_ptr< Semaphore > theSemaphore)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+Two (
+\subsubsection[{\texorpdfstring{task\+Two(std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Sem1, std\+::shared\+\_\+ptr$<$ Semaphore $>$ the\+Sem2)}{taskTwo(std::shared_ptr< Semaphore > theSem1, std::shared_ptr< Semaphore > theSem2)}}]{\setlength{\rightskip}{0pt plus 5cm}void task\+Two (
 \begin{DoxyParamCaption}
-\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Semaphore}
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Sem1, }
+\item[{std\+::shared\+\_\+ptr$<$ {\bf Semaphore} $>$}]{the\+Sem2}
 \end{DoxyParamCaption}
-)}\hypertarget{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}{}\label{ronz_8cpp_ae4ea9570be601d182fa473c7ca431852}
+)}\hypertarget{ronz_8cpp_a936e0443086bc76ddf2bc31dd61f6e86}{}\label{ronz_8cpp_a936e0443086bc76ddf2bc31dd61f6e86}
+
+
+print twice 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the\+Sem} & is a shared pointer for a semaphore \\
+\hline
+{\em the\+Sem2} & is a shared pointer for a semaphore\\
+\hline
+\end{DoxyParams}
+print part 1 then signal before waiting for task\+One then print part 2 

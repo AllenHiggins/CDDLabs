@@ -99,10 +99,12 @@ Include dependency graph for ronz.cpp:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2696073bbedb6b55e6a52d2180c2a9b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ronz_8cpp.html#a2696073bbedb6b55e6a52d2180c2a9b3">taskOne</a> (std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSemaphore)</td></tr>
-<tr class="separator:a2696073bbedb6b55e6a52d2180c2a9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4ea9570be601d182fa473c7ca431852"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ronz_8cpp.html#ae4ea9570be601d182fa473c7ca431852">taskTwo</a> (std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSemaphore)</td></tr>
-<tr class="separator:ae4ea9570be601d182fa473c7ca431852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4d8446950451643863852e525143027"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ronz_8cpp.html#aa4d8446950451643863852e525143027">taskOne</a> (std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSem1, std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSem2)</td></tr>
+<tr class="memdesc:aa4d8446950451643863852e525143027"><td class="mdescLeft">&#160;</td><td class="mdescRight">print twice  <a href="#aa4d8446950451643863852e525143027">More...</a><br /></td></tr>
+<tr class="separator:aa4d8446950451643863852e525143027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a936e0443086bc76ddf2bc31dd61f6e86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ronz_8cpp.html#a936e0443086bc76ddf2bc31dd61f6e86">taskTwo</a> (std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSem1, std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt; theSem2)</td></tr>
+<tr class="memdesc:a936e0443086bc76ddf2bc31dd61f6e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">print twice  <a href="#a936e0443086bc76ddf2bc31dd61f6e86">More...</a><br /></td></tr>
+<tr class="separator:a936e0443086bc76ddf2bc31dd61f6e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ronz_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
 <tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -120,11 +122,12 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>&lt; Launch the threads </p>
+<p>&lt; Launch the threads</p>
+<p>&lt; threads fork rejoins main thread </p>
 
 </div>
 </div>
-<a class="anchor" id="a2696073bbedb6b55e6a52d2180c2a9b3"></a>
+<a class="anchor" id="aa4d8446950451643863852e525143027"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -132,15 +135,35 @@ Functions</h2></td></tr>
           <td class="memname">void taskOne </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt;&#160;</td>
-          <td class="paramname"><em>theSemaphore</em></td><td>)</td>
+          <td class="paramname"><em>theSem1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>theSem2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>print twice </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">theSem</td><td>is a shared pointer for a semaphore </td></tr>
+    <tr><td class="paramname">theSem2</td><td>is a shared pointer for a semaphore</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>print part 1 then signal before waiting for taskTwo then print part 2 </p>
+
 </div>
 </div>
-<a class="anchor" id="ae4ea9570be601d182fa473c7ca431852"></a>
+<a class="anchor" id="a936e0443086bc76ddf2bc31dd61f6e86"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -148,11 +171,31 @@ Functions</h2></td></tr>
           <td class="memname">void taskTwo </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt;&#160;</td>
-          <td class="paramname"><em>theSemaphore</em></td><td>)</td>
+          <td class="paramname"><em>theSem1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classSemaphore.html">Semaphore</a> &gt;&#160;</td>
+          <td class="paramname"><em>theSem2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>print twice </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">theSem</td><td>is a shared pointer for a semaphore </td></tr>
+    <tr><td class="paramname">theSem2</td><td>is a shared pointer for a semaphore</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>print part 1 then signal before waiting for taskOne then print part 2 </p>
 
 </div>
 </div>
