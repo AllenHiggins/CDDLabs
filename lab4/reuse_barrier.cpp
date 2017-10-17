@@ -4,53 +4,67 @@
  * \copyright GNU Public Licence
  * \mainpage Lab4 reusable barrier
  * \section  using Semaphore class create a programe that demonstrates a reusable barrier
+ *
+ *
+ * bug = deadlock after passing first barrier?
  */
 
 #include "Semaphore.h"
 #include <iostream>
 #include <thread>
 
-static int count = 0;
+int count = 0;
+int numOfThreads = 3;
 
 /*!
  * \brief add One to current count
- * \param theSem is a shared pointer for a semaphore
- * \param int num
- * \details Add one to shared int num and print out the result using semaphore as mutex lock for critical section
- *  also print out the thread ID
+ * \param semaphore mutex
+ * \param semaphore barrier
+ * \param semaphore barrier
+ * \details reuse a barrier with three threads
  */
 
 
-void doSomeThing(std::shared_ptr<Semaphore> mutex,
-		 std::shared_ptr<Semaphore> barrierA,
-		 std::shared_ptr<Semaphore> barrierB){
+/*! 
+ * \breif loop threads
+ * \param Semaphore mutex
+ * \param Semaphore barrier
+ * \param Semaphore barrier
+ * \details three thread do some work on a section of code, wait until all threads are done before moving on to the next section of work
+ */
+void doSomeThing(std::shared_ptr<Semaphore> mutex,std::shared_ptr<Semaphore> barrierA,std::shared_ptr<Semaphore> barrierB){
 
   while(true){
 
-    std::cout << "Do Something frist part " << " ThreadID: " << std::this_thread::get_id() << std::endl
+    std::cout << "Do Something frist part " << " ThreadID: " << std::this_thread::get_id() << std::endl;
     
-    mutex.wait();
+    mutex->Wait();
     count++;
-    if(count == 3){
-      barrierB.wait();
-      barrierA.signal();
+    if(count == numOfThreads){
+      barrierB->Wait();
+      barrierA->Signal();
+      std::cout << "barrier B now open --- barrier A closed --- thread count = " << count << std::endl;
     }
-    mutex.signal();
+    mutex->Signal();
 
-    barrierA.wait();
-    barrierB.signal();
-
-    std::cout << "Do Something second part " << " ThreadID: " << std::this_thread::get_id() << std::endl
     
-    mutex.wait();
+    barrierA->Wait();
+    barrierB->Signal();
+
+
+    std::cout << "Do Something second part " << " ThreadID: " << std::this_thread::get_id() << std::endl;
+    
+    mutex->Wait();
     count--;
     if(count == 0){
-      barrierA.wait();
-      barrierB.signal();
+      barrierA->Wait();
+      barrierB->Signal();
+      std::cout << "barrier A now open --- barrier B closed --- thread count = " << count << std::endl;
     }
-  
-    barrierB.wait();
-    barrierB.signal();
+    
+    barrierB->Wait();
+    barrierB->Signal();
+   
   }
  
 }
@@ -61,11 +75,11 @@ int main(void){
   /*< create three threads */
   std::thread threadOne, threadTwo, threadThree;
   /*< create one semaphore for the mutex */
-  std::shared_ptr<Semaphore> mutex( new Semaphore);
+  std::shared_ptr<Semaphore> mutex( new Semaphore(1) );
   /*< create a semoaphone for a barrierA */
-  std::shared_ptr<Semapore> barrierA( new Semaphore);
+  std::shared_ptr<Semaphore> barrierA( new Semaphore);
   /*< create a semphore for a barrierB */
-  std::shared_ptr<Semaphore> barrierB( new Semaphore);
+  std::shared_ptr<Semaphore> barrierB( new Semaphore(1));
   
   /**< Launch the threads  */
   threadOne=std::thread(doSomeThing,mutex,barrierA,barrierB);

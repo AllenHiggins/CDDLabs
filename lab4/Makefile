@@ -7,7 +7,7 @@ HFILES=Semaphore.h
 ALL:$(CFILES) $(HFILES)
 	$(CC) $(CFLAGS) *.cpp -o barrierLab4
 
-DEBUG: DEBUGFLAGS = -DDEBUG
+DEBUG: DEBUGFLAGS = -g -O0
 DEBUG: ALL
 
 CLEAN:
