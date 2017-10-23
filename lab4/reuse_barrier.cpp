@@ -6,24 +6,17 @@
  * \section  using Semaphore class create a programe that demonstrates a reusable barrier
  *
  *
- * bug = deadlock after passing first barrier?
+ * bug = deadlock after passing first barrier? one thread can loop back up quickly and enter first part before waiting for all threads? also, one thread can enter second part before waiting for all threads? suspect barrier(s) as problem?
  */
 
 #include "Semaphore.h"
 #include <iostream>
 #include <thread>
 
+/*< initialize count */
 int count = 0;
+/*< initialize the number of threads used in the programe*/
 int numOfThreads = 3;
-
-/*!
- * \brief add One to current count
- * \param semaphore mutex
- * \param semaphore barrier
- * \param semaphore barrier
- * \details reuse a barrier with three threads
- */
-
 
 /*! 
  * \breif loop threads
@@ -35,39 +28,36 @@ int numOfThreads = 3;
 void doSomeThing(std::shared_ptr<Semaphore> mutex,std::shared_ptr<Semaphore> barrierA,std::shared_ptr<Semaphore> barrierB){
 
   while(true){
-
-    std::cout << "Do Something frist part " << " ThreadID: " << std::this_thread::get_id() << std::endl;
     
     mutex->Wait();
     count++;
+    std::cout << "Do Something frist part " << " ThreadID: " << std::this_thread::get_id() << " count = " << count << std::endl;
     if(count == numOfThreads){
       barrierB->Wait();
       barrierA->Signal();
-      std::cout << "barrier B now open --- barrier A closed --- thread count = " << count << std::endl;
+      std::cout << "barrier B now open --- barrier A closed ---" << std::endl;
     }
     mutex->Signal();
 
-    
-    barrierA->Wait();
-    barrierB->Signal();
-
-
-    std::cout << "Do Something second part " << " ThreadID: " << std::this_thread::get_id() << std::endl;
+    /*< wait at second barrier for all threads*/
+    barrierA->Signal();
+    barrierB->Wait();
     
     mutex->Wait();
     count--;
+    std::cout << "Do Something second part " << " ThreadID: " << std::this_thread::get_id() << " Count = " << count << std::endl;
     if(count == 0){
       barrierA->Wait();
       barrierB->Signal();
-      std::cout << "barrier A now open --- barrier B closed --- thread count = " << count << std::endl;
+      std::cout << "barrier A now open --- barrier B closed ---" << std::endl;
     }
-    
+
+    /*< wait at the frist barrier for all threads */
+    barrierA->Signal();
     barrierB->Wait();
-    barrierB->Signal();
    
-  }
- 
-}
+  }//end of while
+}//end of doSomeThing function
 
 
 int main(void){
