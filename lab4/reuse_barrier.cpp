@@ -6,15 +6,14 @@
  * \section  using Semaphore class create a programe that demonstrates a reusable barrier
  *
  *
- * bug = deadlock after passing first barrier? one thread can loop back up quickly and enter first part before waiting for all threads? also, one thread can enter second part before waiting for all threads? suspect barrier(s) as problem?
+ * bug = deadlock when hitting the first mutex in the doSomething function?
  */
 
 #include "Semaphore.h"
 #include <iostream>
 #include <thread>
 
-/*< initialize count */
-int count = 0;
+
 /*< initialize the number of threads used in the programe*/
 int numOfThreads = 3;
 
@@ -25,56 +24,58 @@ int numOfThreads = 3;
  * \param Semaphore barrier
  * \details three thread do some work on a section of code, wait until all threads are done before moving on to the next section of work
  */
-void doSomeThing(std::shared_ptr<Semaphore> mutex,std::shared_ptr<Semaphore> barrierA,std::shared_ptr<Semaphore> barrierB){
+void doSomeThing(std::shared_ptr<Semaphore> mutex,std::shared_ptr<Semaphore> barrier1,std::shared_ptr<Semaphore> barrier2, int *count){
 
   while(true){
-    
+  
+    std::cout << "function doSomething start " <<  *count << std::endl;
     mutex->Wait();
-    count++;
-    std::cout << "Do Something frist part " << " ThreadID: " << std::this_thread::get_id() << " count = " << count << std::endl;
-    if(count == numOfThreads){
-      barrierB->Wait();
-      barrierA->Signal();
-      std::cout << "barrier B now open --- barrier A closed ---" << std::endl;
+    *count += 1;
+    std::cout << "Count: " <<  *count << std::endl;
+    if(*count == 3){
+      barrier2->Wait();
+      barrier1->Signal();
     }
     mutex->Signal();
 
-    /*< wait at second barrier for all threads*/
-    barrierA->Signal();
-    barrierB->Wait();
-    
-    mutex->Wait();
-    count--;
-    std::cout << "Do Something second part " << " ThreadID: " << std::this_thread::get_id() << " Count = " << count << std::endl;
-    if(count == 0){
-      barrierA->Wait();
-      barrierB->Signal();
-      std::cout << "barrier A now open --- barrier B closed ---" << std::endl;
-    }
+    barrier1->Wait();
+    barrier1->Signal();
 
-    /*< wait at the frist barrier for all threads */
-    barrierA->Signal();
-    barrierB->Wait();
-   
+    std::cout << "Critical Section" << std::endl;
+
+    mutex->Wait();
+    *count -= 1;
+    std::cout << "Count: " <<  *count << std::endl;
+    if(*count == 0){
+      barrier1->Wait();
+      barrier2->Signal();
+    }
+    mutex->Signal();
+    std::cout << "function doSomething end " <<  *count << std::endl;
+    barrier2->Wait();
+    barrier2->Signal();
+    
   }//end of while
 }//end of doSomeThing function
 
 
 int main(void){
 
+  int count = 0;
+  
   /*< create three threads */
   std::thread threadOne, threadTwo, threadThree;
   /*< create one semaphore for the mutex */
-  std::shared_ptr<Semaphore> mutex( new Semaphore(1) );
-  /*< create a semoaphone for a barrierA */
-  std::shared_ptr<Semaphore> barrierA( new Semaphore);
-  /*< create a semphore for a barrierB */
-  std::shared_ptr<Semaphore> barrierB( new Semaphore(1));
+  std::shared_ptr<Semaphore> mutex( new Semaphore(0));
+  std::shared_ptr<Semaphore> barrier1( new Semaphore(0));
+  std::shared_ptr<Semaphore> barrier2( new Semaphore(1));
+
+  std::cout << "Main Started " << std::endl;
   
   /**< Launch the threads  */
-  threadOne=std::thread(doSomeThing,mutex,barrierA,barrierB);
-  threadTwo=std::thread(doSomeThing,mutex,barrierA,barrierB);
-  threadThree=std::thread(doSomeThing,mutex,barrierA,barrierB);
+  threadOne=std::thread(doSomeThing,mutex,barrier1,barrier2,&count);
+  threadTwo=std::thread(doSomeThing,mutex,barrier1,barrier2,&count);
+  threadThree=std::thread(doSomeThing,mutex,barrier1,barrier2,&count);
 
   /*!< threads fork rejoins main thread*/
   threadOne.join();

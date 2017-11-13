@@ -1,0 +1,18 @@
+#include "Semaphore.h"
+
+class Barrier
+{
+ 
+ public:
+  Barrier(int n);
+  int n;
+  int count;
+  std::shared_ptr<Semaphore> mutex( new Semaphore(1));
+  std::shared_ptr<Semaphore> bar_1( new Semaphore(0));
+  std::shared_ptr<Semaphore> bar_2( new Semaphore(0));
+  phase_1():
+  phase_2():
+  wait ():
+	
+	
+}
